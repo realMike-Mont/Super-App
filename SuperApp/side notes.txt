@@ -1,7 +1,0 @@
-Apps
-================================================================
-Calculator     |  calc
-Notes          |  note
-Name Analyzer  |  name
-
-methods course
