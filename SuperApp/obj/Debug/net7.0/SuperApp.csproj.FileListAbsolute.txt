@@ -1,0 +1,15 @@
+C:\Users\Mike\Desktop\Codes Projects\SuperApp\obj\Debug\net7.0\SuperApp.csproj.AssemblyReference.cache
+C:\Users\Mike\Desktop\Codes Projects\SuperApp\obj\Debug\net7.0\SuperApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Mike\Desktop\Codes Projects\SuperApp\obj\Debug\net7.0\SuperApp.AssemblyInfoInputs.cache
+C:\Users\Mike\Desktop\Codes Projects\SuperApp\obj\Debug\net7.0\SuperApp.AssemblyInfo.cs
+C:\Users\Mike\Desktop\Codes Projects\SuperApp\obj\Debug\net7.0\SuperApp.csproj.CoreCompileInputs.cache
+C:\Users\Mike\Desktop\Codes Projects\SuperApp\bin\Debug\net7.0\SuperApp.exe
+C:\Users\Mike\Desktop\Codes Projects\SuperApp\bin\Debug\net7.0\SuperApp.deps.json
+C:\Users\Mike\Desktop\Codes Projects\SuperApp\bin\Debug\net7.0\SuperApp.runtimeconfig.json
+C:\Users\Mike\Desktop\Codes Projects\SuperApp\bin\Debug\net7.0\SuperApp.dll
+C:\Users\Mike\Desktop\Codes Projects\SuperApp\bin\Debug\net7.0\SuperApp.pdb
+C:\Users\Mike\Desktop\Codes Projects\SuperApp\obj\Debug\net7.0\SuperApp.dll
+C:\Users\Mike\Desktop\Codes Projects\SuperApp\obj\Debug\net7.0\refint\SuperApp.dll
+C:\Users\Mike\Desktop\Codes Projects\SuperApp\obj\Debug\net7.0\SuperApp.pdb
+C:\Users\Mike\Desktop\Codes Projects\SuperApp\obj\Debug\net7.0\SuperApp.genruntimeconfig.cache
+C:\Users\Mike\Desktop\Codes Projects\SuperApp\obj\Debug\net7.0\ref\SuperApp.dll
