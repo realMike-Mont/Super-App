@@ -6,13 +6,16 @@
     class Program
     {
         public static void Main()
-        {
-            firstScreen();
-            appNavigator();
+        {   
+            ScreenSettings();
+
+            WelcomeScreen();
+    
+            AppNavigator();
         }
 
-        //The screen that will be displayed to the user when start the app, also this funciton is defining the window size, title, colors etc
-        public static void firstScreen()
+        //this method is defining the window size, title, colors and others settings
+        public static void ScreenSettings()
         {
             //Window characteristics
             Console.BackgroundColor = ConsoleColor.DarkGray;
@@ -21,38 +24,136 @@
             //Console.WindowWidth = Console.LargestWindowWidth;
             //Console.WindowHeight = Console.LargestWindowHeight;
             Console.Title = "Super App";
+        }
 
-            Console.Write("Super App\nAn app that has many others on it, type 'apps' to get the apps list or 'commands' / 'help' to get the command list\n\n\n\n");
+
+        //This method actually is unnecessary, Im just making it to do some methods-arguments calls
+        public static void WelcomeScreen()
+        {
+            //vars to take answer the command from the user
+            string welcomScreenNavigatorController;
+
             
+
+            Console.WriteLine("Welcome to SuperApp OS (SAOS)\n\n");
+
+            Console.WriteLine("\n\nType 'sing in' / 'si' for sing in or 'sing up' / 'su' to sing up");
+            Console.Write(">>>  ");
+            welcomScreenNavigatorController = Console.ReadLine();
+            Console.WriteLine();
+
+            if (welcomScreenNavigatorController == "sing in" || welcomScreenNavigatorController == "Sing in" || welcomScreenNavigatorController == "Sing In" || welcomScreenNavigatorController == "SING IN" || welcomScreenNavigatorController == "si" || welcomScreenNavigatorController == "SI")
+                {
+                    SingInProcess();
+                }
+
+            if (welcomScreenNavigatorController == "sing up" || welcomScreenNavigatorController == "Sing up" || welcomScreenNavigatorController == "Sing Up" || welcomScreenNavigatorController == "SING UP" || welcomScreenNavigatorController == "su" || welcomScreenNavigatorController == "SU")
+                {
+                    SingUpProcess();
+                }
+            //else
+            //   {Console.WriteLine("Wrong command, try with 'sing in' or 'sing up'");}
+
+        }
+
+        public static void SingInProcess()
+        {
+            //vars to promt user for credentials
+            string singInUsername, singInPassword;
+
+            //vars holding already saved credentials to compare (receiving credentials from SingUpProcess() method)
+            string[] userSavedCredentialReceiver = SingUpProcess(); // possible cause of the bug / the command 'sing in' is calling the process/method sing up instead of sing in
+            string userSavedUsername = userSavedCredentialReceiver[0], userSavedPassword = userSavedCredentialReceiver[1];
+
+            Console.WriteLine("Sing In\n");
+
+            Console.Write("Username: ");
+            singInUsername = Console.ReadLine();
+            
+            Console.Write("Password: ");
+            singInPassword = Console.ReadLine();
+
+            if (singInUsername == userSavedUsername)
+                {
+                    if (singInPassword == userSavedPassword)
+                    {
+                        Console.WriteLine("Welcome back " + userSavedUsername);
+                    }
+
+                }
+
+          
+           
+        }
+
+        public static string[]  SingUpProcess()
+        {
+           
+            //vars to save the user credentials
+            string savedUsername, savedPassword;
+
+            Console.WriteLine("Sing Up\n\n");
+
+            Console.Write("New username: ");
+            savedUsername = Console.ReadLine();
+            
+            Console.Write("New password: ");
+            savedPassword = Console.ReadLine();
+
+            Console.WriteLine("\n\n");
+
+            if (savedUsername.Any())
+                {
+                    if (savedPassword.Any())
+                        {
+                            Console.WriteLine("User successfully created, returning back to the app...\n\n\n");
+                            Main();
+                        }
+                    else
+                        {
+                            Console.WriteLine("You need to create a password in order to sing in");
+                        }
+                }
+            else 
+                {
+                    Console.WriteLine("You need a username in order to sing in");
+                }
+            
+            string[] userSavedCredentialTransporter = {savedUsername, savedPassword};
+            return userSavedCredentialTransporter;
+        }
+
+        public static string[] SingInInformationTransferer(string userInputUsername, string userInputPasword)
+        {
+            //var to transfer the user input value to the next method
+            string[] userCredentials = {userInputUsername, userInputPasword};
+
+            return userCredentials;
+            //userCredentials[0], userCredentials[1];  
         }
 
         //Menu to navigate throughout the app
-        public static void appNavigator()
+        public static void AppNavigator()
         {   
             
             //var to store the commands
-            string appNavigatorController;
-
-         
-
-            //var to check if user has executed or not a commands in the app list NOT-IMPLEMENTED
-            //bool navigatorChecker = true;
+            string AppNavigatorController;
 
             Console.WriteLine();
             Console.Write(">>>  ");
-            appNavigatorController = Console.ReadLine();
+            AppNavigatorController = Console.ReadLine();
             Console.WriteLine();
 
-            switch(appNavigatorController)
+            switch(AppNavigatorController)
             {
 
                 case "apps":
                 appsList();
                 break;
 
-            //if user hit enter without any commands the appNavigator will be recalled to promt for a command
+                //if user hit enter without any commands the AppNavigator will be recalled to promt for a command
                 case "":
-                appNavigator();
+                AppNavigator();
                 break;
 
                 case "calculator":
@@ -71,7 +172,9 @@
                 appObjectsLister();
                 break;
                 
-                
+                case "mabl":
+                appMadLibGame();
+                break;
                 
                 //case "":
                 //break;
@@ -84,45 +187,38 @@
                 commandsList();
                 break;
 
-                //this two cases are going to assing the value 'close' or 'exit' to the appNavigatorController var, so the program will know on the next if-else statement if the user is or isnot willing to close the app
+                //this two cases are going to assing the value 'close' or 'exit' to the AppNavigatorController var, so the program will know on the next if-else statement if the user is or isnot willing to close the app
+                //TO-DO take a look into this, looks like this whole block of code (if-statement and exit/close  cases) is easier just call commandCloseExitApp method whenener the user execute the exit/close command, the commandCloseExitApp method is capable to handle the user's willingness to close or not the app
                 case "exit":
                 break;
 
                 case "close":
                 break;
 
-                // exit the game without a promt or user willingness verification
+                // exit the game without a promt or user willingness verification, like just killing the game
                 case "kill":
                 Environment.Exit(0);
                 break;
 
                 //On the default case Im setting up the method to call back the switch since user was unable to run a app/command
-                default:
+                default: //TO-DO recall the AppNavigator method here so if user commans doesnt match any of the options available the program has to let the user now the options and also prompt for a input
 
                 Console.WriteLine("Please type any of the apps names or command availables on the next listing\n");
                
                 appsList();
                 commandsList();
-
-               //appNavigator();
-                /*navigatorChecker = false;
-               
-                if (navigatorChecker == false)
-                    {
-                        appNavigator();
-                    }*/
-
                 break;
             }
 
             //this method evalute whenever or not the user want to close the app, if not will recall the menu / app navigator to stay the app
-            if (appNavigatorController == "exit" || appNavigatorController == "close")
+            //TO-DO (refering to the cases exit/close from above) take a look into this, looks like this whole block of code (if-statement and exit/close  cases) is easier just call commandCloseExitApp method whenener the user execute the exit/close command, the commandCloseExitApp method is capable to handle the user's willingness to close or not the app
+            if (AppNavigatorController == "exit" || AppNavigatorController == "close")
             {
                 commandCloseExitApp();
             }
             else
             {
-                appNavigator();
+                AppNavigator();
             }
             
         }
@@ -140,6 +236,7 @@
 
         }
 
+        //command to show up all the commands available
         public static void commandsList()
         {
 
@@ -168,8 +265,7 @@
             
             Console.WriteLine();
 
-            Console.Write("Mathematical operator (it can be + - * or /): ");
-            //calculatorOperator = Convert.ToChar(Console.Read());
+            Console.Write("Mathematical operator (it can be + - * / or %): ");
             calculatorOperator = Convert.ToChar(Console.ReadLine());
 
             Console.WriteLine();
@@ -197,8 +293,12 @@
                 calculationResult = (firstNumber / secondNumber);
                 break;
 
+                case '%':
+                calculationResult = CalculatorPercentage(firstNumber, secondNumber);
+                break;
+
                 default:
-                Console.Write("Please choose a correct operator (it can be + - * or /): ");
+                Console.Write("Please choose a correct operator (it can be + - * / or %): ");
                 break;
             }
 
@@ -208,6 +308,16 @@
 
         }
 
+        //method to calculate the percent of given numbers then pass the value back to the calculator method (again, this whole thing is completly
+        //unnencessary) so Im working in this way just to use the argument staments and those things
+        public static double CalculatorPercentage(double percentageNumberToCalculate, double percentageTotalNumberToCalculate)
+        {
+            double percentageCalculationResult = (percentageNumberToCalculate * 0.01) * percentageTotalNumberToCalculate;
+            
+           return percentageCalculationResult; //TO-DO challenge: convert this double method to a array one
+        }
+
+        //TO-DO finish this word-minigame
         public static void appMadLibGame()
         {
             //Testing
@@ -216,7 +326,7 @@
         }
 
         //App to list things, like a stickynote
-        public static void appObjectsLister() //TO-DO : the array is getting back to its original value removing the user input as soon as the method is recalled or the user jump to another app
+        public static void appObjectsLister() //TO-DO : the array is getting back to its original value removing the user input as soon as the method is recalled or the user jump to another app, fix this by storing the value definitively
         {
             //var to hold 10 objects to list
             string []objectsLister = new string[10];
@@ -224,7 +334,7 @@
             //var to navigate troughout this objects app
             string objectsListerNavigatorController;
 
-            //var to specifi on what slot store the objects
+            //var to specify on what slot store the objects
             int objectSlotChecker;
 
             Console.WriteLine("Objects Lister, an app to write down up to 10 objects.\nType 'view' to watch the list or 'add' to add new objects in it\n");
@@ -326,6 +436,13 @@
 
         }
 
+        public static int gunsCriticalRate(int criticalRate)
+        {
+
+
+            
+            return criticalRate;
+        }
 
 
 
@@ -357,30 +474,30 @@
 
 
 
-        //Close the app/terminal (user has to execute the exit/close command from the appNavigator)
+        //Close the app/terminal (user has to execute the exit/close command from the AppNavigator)
         public static void commandCloseExitApp()
         {   
 
             //var to confirm user willingess to close app
-            string confirmcommandCloseExitApp;
+            string confirmCommandCloseExitApp;
 
-            //if statement to make sure user want to close or not the app5
+            //if-statement to make sure user want to close or not the app
             Console.Write("Are you sure you want to close this app? ");
-            confirmcommandCloseExitApp = Console.ReadLine();
+            confirmCommandCloseExitApp = Console.ReadLine();
             Console.Write("\n\n");
 
-            if (confirmcommandCloseExitApp == "yes" || confirmcommandCloseExitApp == "YES" || confirmcommandCloseExitApp == "Yes" || confirmcommandCloseExitApp == "y" || confirmcommandCloseExitApp == "Y")
+            if (confirmCommandCloseExitApp == "yes" || confirmCommandCloseExitApp == "YES" || confirmCommandCloseExitApp == "Yes" || confirmCommandCloseExitApp == "y" || confirmCommandCloseExitApp == "Y")
             {
                 Console.Write("Press any key to exit");
                 Environment.Exit(0);
             }
 
-            if (confirmcommandCloseExitApp == "no" || confirmcommandCloseExitApp == "NO" || confirmcommandCloseExitApp == "No" || confirmcommandCloseExitApp == "n" || confirmcommandCloseExitApp == "N")
+            if (confirmCommandCloseExitApp == "no" || confirmCommandCloseExitApp == "NO" || confirmCommandCloseExitApp == "No" || confirmCommandCloseExitApp == "n" || confirmCommandCloseExitApp == "N")
             {
-                appNavigator();
+                AppNavigator();
             }
 
-            if (confirmcommandCloseExitApp != "yes" && confirmcommandCloseExitApp != "YES" && confirmcommandCloseExitApp != "Yes" && confirmcommandCloseExitApp != "y" && confirmcommandCloseExitApp != "Y" && confirmcommandCloseExitApp != "no" && confirmcommandCloseExitApp != "NO" && confirmcommandCloseExitApp != "No" && confirmcommandCloseExitApp != "n" && confirmcommandCloseExitApp != "N")
+            if (confirmCommandCloseExitApp != "yes" && confirmCommandCloseExitApp != "YES" && confirmCommandCloseExitApp != "Yes" && confirmCommandCloseExitApp != "y" && confirmCommandCloseExitApp != "Y" && confirmCommandCloseExitApp != "no" && confirmCommandCloseExitApp != "NO" && confirmCommandCloseExitApp != "No" && confirmCommandCloseExitApp != "n" && confirmCommandCloseExitApp != "N")
             {
              Console.Write("You can type 'yes' or 'no' / 'y' n' so... ");
              commandCloseExitApp();
